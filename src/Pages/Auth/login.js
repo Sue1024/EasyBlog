@@ -61,7 +61,7 @@ class Login extends React.Component {
           })(
             <Input
               prefix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />}
-              placeholder="Username"
+              placeholder="用户名"
             />
           )}
         </Form.Item>
@@ -72,7 +72,7 @@ class Login extends React.Component {
             <Input
               prefix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
               type="password"
-              placeholder="Password"
+              placeholder="密码"
             />
           )}
         </Form.Item>
@@ -80,9 +80,9 @@ class Login extends React.Component {
           {getFieldDecorator("remember", {
             valuePropName: "checked",
             initialValue: true
-          })(<Checkbox>Remember me</Checkbox>)}
-          <a className="login-form-forgot" href="">
-            Forgot password
+          })(<Checkbox>记住我</Checkbox>)}
+          <a style={{float: "right"}} href="">
+            登录遇到问题？
           </a>
           <Button
             type="primary"
@@ -95,9 +95,8 @@ class Login extends React.Component {
               margin: "auto"
             }}
           >
-            Log in
+            登录
           </Button>
-          Or <a href="">register now!</a>
         </Form.Item>
       </Form>
     );

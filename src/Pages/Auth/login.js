@@ -15,38 +15,12 @@ class Login extends React.Component {
             password: "091001"
           }
         );
-        instance.then(response=>{
-          console.log(response)
-          if(response.status===200) {
+        instance.then(response => {
+          if (response.status === 200) {
             localStorage.setItem("access_token", response.data.access_token);
             localStorage.setItem("refresh_token", response.data.refresh_token);
           }
-
-          const instance3 = axios.get(
-            "http://192.168.3.2:8082/user-service/user-management/all",
-            {
-              headers: {
-                "Authorization": `Bearer ${localStorage.getItem("access_token")}` 
-              }
-            }
-          );
-  
-          instance3.then(response => {
-            console.log(response)
-          })
-        })
-        const instance2 = axios.post(
-          "http://192.168.3.2:8082/user-service/user/register",
-          {
-            username: "sue",
-            password: "091001"
-          }
-        );
-        instance2.then(response=>{
-          console.log(response)
-        })
-
-        
+        });
       }
     });
   };
@@ -81,7 +55,7 @@ class Login extends React.Component {
             valuePropName: "checked",
             initialValue: true
           })(<Checkbox>记住我</Checkbox>)}
-          <a style={{float: "right"}} href="">
+          <a style={{ float: "right" }} href="">
             登录遇到问题？
           </a>
           <Button

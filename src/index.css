@@ -11,3 +11,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.ant-calendar-picker-clear, .ant-calendar-picker-icon {
+  left: 12px;
+  right: none
+}
+
+.ant-calendar-picker-input.ant-input {
+  padding-left: 30px
+}

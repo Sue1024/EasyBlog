@@ -1,6 +1,7 @@
 import React from "react";
 import { Card } from 'antd';
 import Login from './login'
+import Register from './register'
 
 export default class Auth extends React.Component {
   constructor(props) {
@@ -27,7 +28,7 @@ export default class Auth extends React.Component {
     ];
     let map = {
       "login": <Login></Login>,
-      "register": <Login></Login>
+      "register": <Register></Register>
     }
     return (
       
@@ -40,7 +41,7 @@ export default class Auth extends React.Component {
             this.onTabChange(key);
           }}
         >
-          <Login></Login>
+          {map[this.state.activeTabKey]}
         </Card>
       </div>
     );

@@ -1,13 +1,12 @@
 import React from "react";
-import Auth from './Pages/Auth'
+import Main from './Pages/Main'
 import "./App.css";
-
-function App() {
-  return (
-    <React.Fragment>
-      <Auth></Auth>
-    </React.Fragment>
-  );
+export default class App extends React.Component {
+  render() {
+    return (
+      <React.Fragment>
+        <Main></Main>
+      </React.Fragment>
+    );
+  }
 }
-
-export default App;

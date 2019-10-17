@@ -3,16 +3,33 @@ import { Form, Icon, Input, Button, Checkbox } from "antd";
 import axios from "axios";
 
 class Login extends React.Component {
+  constructor(props) {
+    super(props)
+    this.onUserNameChange = this.onUserNameChange.bind(this);
+    this.onPasswordChange = this.onPasswordChange.bind(this)
+  }
+
+  onUserNameChange(e) {
+    this.setState({
+      username: e.target.value
+    })
+  }
+
+  onPasswordChange(e) {
+    this.setState({
+      password: e.target.value
+    })
+  }
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log("Received values of form: ", values);
         const instance = axios.post(
-          "http://192.168.3.2:8082/user-service/user/login",
+          "http://192.168.3.3:8080/user-service/user/login",
           {
-            username: "sue",
-            password: "091001"
+            username: this.state.username,
+            password: this.state.password
           }
         );
         instance.then(response => {
@@ -36,6 +53,7 @@ class Login extends React.Component {
             <Input
               prefix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />}
               placeholder="用户名"
+              onChange={this.onUserNameChange}
             />
           )}
         </Form.Item>
@@ -47,6 +65,7 @@ class Login extends React.Component {
               prefix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
               type="password"
               placeholder="密码"
+              onChange={this.onPasswordChange}
             />
           )}
         </Form.Item>

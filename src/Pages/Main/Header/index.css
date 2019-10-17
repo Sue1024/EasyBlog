@@ -1,0 +1,15 @@
+.header {
+    height: 60px;
+    position: fixed;
+    width: 100%;
+    border: 1px solid #e7e7e7
+}
+
+.logo {
+    height: 60px;
+    line-height: 60px;
+    font-size: 30px;
+    color: orange;
+    font-weight: bold;
+    margin-left: 10px;
+}

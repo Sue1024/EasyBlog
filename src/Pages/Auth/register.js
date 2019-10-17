@@ -1,44 +1,52 @@
 import React from "react";
 import { Form, Icon, Input, Button, Checkbox, DatePicker, Radio } from "antd";
 import axios from "axios";
-import moment from 'moment'
+import moment from "moment";
 
 class Register extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       username: "",
       password: "",
       birthdate: "",
-      gender: ""
-    }
-    this.onGenderChange = this.onGenderChange.bind(this)
-    this.onBirthdateChange = this.onBirthdateChange.bind(this)
-    this.onUserNameChange = this.onUserNameChange.bind(this)
-    this.onPasswordChange = this.onPasswordChange.bind(this)
+      gender: "",
+      email: ""
+    };
+    this.onGenderChange = this.onGenderChange.bind(this);
+    this.onBirthdateChange = this.onBirthdateChange.bind(this);
+    this.onUserNameChange = this.onUserNameChange.bind(this);
+    this.onPasswordChange = this.onPasswordChange.bind(this);
+    this.onEmailChange = this.onEmailChange.bind(this)
+  }
+
+  onEmailChange(e) {
+    this.setState({
+      email: e.target.value
+    })
   }
 
   onUserNameChange(e) {
     this.setState({
       username: e.target.value
-    })
+    });
   }
 
   onPasswordChange(e) {
     this.setState({
       password: e.target.value
-    })
+    });
   }
 
   onBirthdateChange(value) {
     this.setState({
       birthdate: value
-    })
+    });
   }
   onGenderChange(e) {
     this.setState({
       gender: e.target.value
-    })
+    });
   }
   handleSubmit = e => {
     e.preventDefault();
@@ -51,11 +59,14 @@ class Register extends React.Component {
             username: this.state.username,
             password: this.state.password,
             gender: this.state.gender,
-            birthdate: moment(this.state.birthdate).format("YYYY-MM-DD")
+            email: this.state.email,
+            birthDate: moment(this.state.birthdate).format("YYYY-MM-DD")
           }
         );
         instance.then(response => {
-          console.log(response);
+          if (response.status === 200) {
+            this.props.registerCallback();
+          }
         });
       }
     });
@@ -96,12 +107,41 @@ class Register extends React.Component {
           )}
         </Form.Item>
         <Form.Item>
+          {getFieldDecorator("email", {
+            rules: [
+              {
+                type: "email",
+                message: "The input is not valid E-mail!"
+              },
+              {
+                required: true,
+                message: "Please input your E-mail!"
+              }
+            ]
+          })(
+            <Input
+              prefix={<Icon type="mail" style={{ color: "rgba(0,0,0,.25)" }} />}
+              type="password"
+              placeholder="邮箱"
+              onChange={this.onEmailChange}
+            />
+          )}
+        </Form.Item>
+        <Form.Item>
           {getFieldDecorator("date-picker", config)(
-            <DatePicker placeholder="生日" style={{width:"100%"}} onChange={this.onBirthdateChange}/>
+            <DatePicker
+              placeholder="生日"
+              style={{ width: "100%" }}
+              onChange={this.onBirthdateChange}
+            />
           )}
         </Form.Item>
         <Form.Item label="性别">
-          <Radio.Group name="radiogroup" defaultValue={1} onChange={this.onGenderChange}>
+          <Radio.Group
+            name="radiogroup"
+            defaultValue={1}
+            onChange={this.onGenderChange}
+          >
             <Radio value="男性">男</Radio>
             <Radio value="女性">女</Radio>
             <Radio value="其他">其他</Radio>

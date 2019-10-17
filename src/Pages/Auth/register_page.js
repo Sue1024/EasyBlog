@@ -1,19 +1,26 @@
 import React from "react";
+import { withRouter } from "react-router"
 import { Card } from 'antd';
-import Login from './login'
 import Register from './register'
 
-export default class Auth extends React.Component {
+class RegisterPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       activeTabKey: 'login',
     };
+    this.registerSuccess = this.registerSuccess.bind(this)
   }
 
   onTabChange = (key, type) => {
-    this.setState({ activeTabKey: key });
+    if(key === 'login') {
+      this.props.history.push("/sign_in")
+    }
   };
+
+  registerSuccess() {
+    this.props.history.push("/sign_in")
+  }
 
   render() {
     const tabList = [
@@ -26,24 +33,21 @@ export default class Auth extends React.Component {
         tab: '注册',
       },
     ];
-    let map = {
-      "login": <Login></Login>,
-      "register": <Register></Register>
-    }
     return (
-      
       <div style={{ width: '100vw', height: '100vh', background: '#f1f1f1', display: 'flex' }}>
         <Card
           style={{ width: 400, height: 600, margin: 'auto' }}
           tabList={tabList}
-          activeTabKey={this.state.activeTabKey}
+          activeTabKey="register"
           onTabChange={key => {
             this.onTabChange(key);
           }}
         >
-          {map[this.state.activeTabKey]}
+          <Register registerCallback={this.registerSuccess}></Register>
         </Card>
       </div>
     );
   }
 }
+
+export default withRouter(RegisterPage)

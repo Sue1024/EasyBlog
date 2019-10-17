@@ -1,36 +1,27 @@
 import React from "react";
 import { Menu, Dropdown, Button } from "antd";
+import axios from "axios";
 import "./index.css";
 export default class Header extends React.Component {
+  constructor() {
+    super();
+    this.onLogout = this.onLogout.bind(this);
+  }
+  onLogout() {
+    const instance = axios.delete(
+      "http://192.168.3.3:8080/user-service/user/logout",
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`
+        }
+      }
+    );
+  }
   render() {
     const menu = (
       <Menu>
         <Menu.Item>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="http://www.alipay.com/"
-          >
-            1st menu item
-          </a>
-        </Menu.Item>
-        <Menu.Item>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="http://www.taobao.com/"
-          >
-            2nd menu item
-          </a>
-        </Menu.Item>
-        <Menu.Item>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="http://www.tmall.com/"
-          >
-            3rd menu item
-          </a>
+          <a onClick={this.onLogout}>退出登录</a>
         </Menu.Item>
       </Menu>
     );
@@ -38,7 +29,7 @@ export default class Header extends React.Component {
       <div className="header">
         <div className="logo">Easy Blog</div>
         <Dropdown overlay={menu} placement="bottomLeft">
-          <Button>bottomLeft</Button>
+          <Button className="user">bottomLeft</Button>
         </Dropdown>
       </div>
     );

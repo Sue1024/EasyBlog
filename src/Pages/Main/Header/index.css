@@ -1,22 +1,26 @@
 .header {
-    height: 60px;
+    height: 10vh;
     position: fixed;
     width: 100%;
     border: 1px solid #e7e7e7;
     display: flex;
     flex-direction: row;
-    align-items: center
+    align-items: center;
+    box-shadow: 0 1px 3px rgba(26,26,26,.1);
+    background: white
 }
 
 .logo {
-    height: 60px;
-    line-height: 60px;
-    font-size: 30px;
-    color: orange;
+    height: 10vh;
+    line-height: 10vh;
+    font-size: 4vh;
+    color: #ec7259;
     font-weight: bold;
     margin-left: 10px;
+    flex:1
 }
 
 .user {
-    border: 1px solid orange
+    border: 1px solid orange;
+    align-self: center
 }

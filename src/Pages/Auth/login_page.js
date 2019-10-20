@@ -17,6 +17,10 @@ class LoginPage extends React.Component {
     }
   };
 
+  onLoginSuccess = () => {
+    this.props.history.push('/')
+  }
+
   render() {
     const tabList = [
       {
@@ -45,7 +49,7 @@ class LoginPage extends React.Component {
             this.onTabChange(key);
           }}
         >
-          <Login></Login>
+          <Login onLoginSuccess={this.onLoginSuccess}></Login>
         </Card>
       </div>
     );

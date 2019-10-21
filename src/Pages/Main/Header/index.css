@@ -12,15 +12,46 @@
 
 .logo {
     height: 10vh;
+    width: 20vw;
     line-height: 10vh;
     font-size: 4vh;
     color: #ec7259;
     font-weight: bold;
-    margin-left: 10px;
+    margin-left: 2vw;
     flex:1
 }
 
+.center {
+    flex: 4
+}
+
+.right {
+    flex: 2
+}
+
 .user {
-    border: 1px solid orange;
-    align-self: center
+    border: none !important;
+    /* align-self: center; */
+    /* flex:1 */
+}
+
+.register {
+    height: 5vh !important;
+    border-radius: 2.5vh !important
+}
+
+.ant-input-search input {
+    border-radius: 2.5vh !important;
+}
+
+.input-wrapper {
+    width: 20vw !important;
+    /* flex: 1; */
+    height: 5vh;
+}
+
+.write {
+    height: 5vh !important;
+    margin-left: 1vw;
+    margin-right: 1vw
 }

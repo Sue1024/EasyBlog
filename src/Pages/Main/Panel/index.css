@@ -1,0 +1,36 @@
+.main {
+    display: flex;
+    height: 100%;
+    flex-direction: row;
+    margin-top: 2vh
+}
+
+.main .left {
+    flex: 2;
+    background: blue;
+    display: flex;
+    flex-direction: column
+}
+
+.main .ad {
+    flex: 2;
+    background: yellow;
+    display: flex
+}
+
+.ad-content {
+    width: 96%;
+    height: 90%;
+    border-radius: 10px;
+    background: black;
+    margin: auto;
+}
+
+.main .article-list {
+    flex: 3;
+    background: grey
+}
+.main .right {
+    background: pink;
+    flex: 1
+}

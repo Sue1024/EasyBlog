@@ -1,101 +1,54 @@
 import React from "react";
+import { withRouter } from "react-router";
 import { Form, Icon, Input, Button, Checkbox } from "antd";
+import LoginPhone from "./login_phone";
+import LoginUserName from "./login_username";
 import axios from "axios";
+
+class LoginType {
+  static USER_NAME = "username";
+  static PHONE_NUM = "phone_num";
+  static EMAIL = "email";
+}
 
 class Login extends React.Component {
   constructor(props) {
-    super(props)
-    this.onUserNameChange = this.onUserNameChange.bind(this);
-    this.onPasswordChange = this.onPasswordChange.bind(this)
+    super(props);
+    this.state = {
+      current: LoginType.USER_NAME
+    };
   }
 
-  onUserNameChange(e) {
+  onPhoneClick = () => {
     this.setState({
-      username: e.target.value
+      current:LoginType.PHONE_NUM
     })
   }
 
-  onPasswordChange(e) {
+  onUserNameClick = () => {
     this.setState({
-      password: e.target.value
+      current:LoginType.USER_NAME
     })
   }
-  handleSubmit = e => {
-    e.preventDefault();
-    this.props.form.validateFields((err, values) => {
-      if (!err) {
-        console.log("Received values of form: ", values);
-        const instance = axios.post(
-          "http://192.168.3.3:8080/user-service/user/login",
-          {
-            username: this.state.username,
-            password: this.state.password
-          }
-        );
-        instance.then(response => {
-          if (response.status === 200) {
-            localStorage.setItem("access_token", response.data.access_token);
-            localStorage.setItem("refresh_token", response.data.refresh_token);
-            this.props.onLoginSuccess()
-          }
-        });
-      }
-    });
-  };
 
   render() {
-    const { getFieldDecorator } = this.props.form;
     return (
-      <Form onSubmit={this.handleSubmit} className="login-form">
-        <Form.Item>
-          {getFieldDecorator("username", {
-            rules: [{ required: true, message: "Please input your username!" }]
-          })(
-            <Input
-              prefix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />}
-              placeholder="用户名"
-              onChange={this.onUserNameChange}
-            />
-          )}
-        </Form.Item>
-        <Form.Item>
-          {getFieldDecorator("password", {
-            rules: [{ required: true, message: "Please input your Password!" }]
-          })(
-            <Input
-              prefix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
-              type="password"
-              placeholder="密码"
-              onChange={this.onPasswordChange}
-            />
-          )}
-        </Form.Item>
-        <Form.Item>
-          {getFieldDecorator("remember", {
-            valuePropName: "checked",
-            initialValue: true
-          })(<Checkbox>记住我</Checkbox>)}
-          <a style={{ float: "right" }} href="">
-            登录遇到问题？
-          </a>
-          <Button
-            type="primary"
-            htmlType="submit"
-            style={{
-              width: 350,
-              height: 40,
-              display: "block",
-              borderRadius: 30,
-              margin: "auto"
-            }}
-          >
-            登录
-          </Button>
-        </Form.Item>
-      </Form>
+      <React.Fragment>
+        {this.state.current === LoginType.USER_NAME ? (
+          <React.Fragment>
+            <LoginUserName></LoginUserName>
+            <a onClick={this.onPhoneClick}>手机验证码登录</a>
+          </React.Fragment>
+        ) : (
+          <React.Fragment>
+            <LoginPhone></LoginPhone>
+            <a onClick={this.onUserNameClick}>用户名密码登录</a>
+          </React.Fragment>
+        )}
+      </React.Fragment>
     );
   }
 }
 
 const WrappedLoginForm = Form.create({ name: "login" })(Login);
-export default WrappedLoginForm;
+export default withRouter(WrappedLoginForm);

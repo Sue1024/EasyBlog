@@ -12,10 +12,10 @@ class Header extends React.Component {
     };
   }
   onLogin = () => {
-    this.props.history.push("/sign_in");
+    this.props.history.push("/auth/sign_in");
   };
   onRegister = () => {
-    this.props.history.push("/sign_up");
+    this.props.history.push("/auth/sign_up");
   };
   onLogout = () => {
     const instance = axios.delete(
@@ -79,7 +79,7 @@ class Header extends React.Component {
     let access_token = localStorage.getItem("access_token");
     if (access_token) {
       this.setState({
-        username: jwt.decode(access_token) && jwt.decode(access_token).username
+        username: jwt.decode(access_token) && jwt.decode(access_token).user_name
       });
     } else {
       this.setState({

@@ -1,4 +1,5 @@
 import React from "react";
+import { withRouter } from "react-router"
 import { Form, Icon, Input, Button, Checkbox, DatePicker, Radio } from "antd";
 import axios from "axios";
 import moment from "moment";
@@ -65,7 +66,7 @@ class Register extends React.Component {
         );
         instance.then(response => {
           if (response.status === 200) {
-            this.props.registerCallback();
+            this.props.push('/auth/sign_up')
           }
         });
       }
@@ -169,4 +170,4 @@ class Register extends React.Component {
 }
 
 const WrappedRegisterForm = Form.create({ name: "register" })(Register);
-export default WrappedRegisterForm;
+export default withRouter(WrappedRegisterForm);

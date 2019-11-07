@@ -1,23 +1,31 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { HashRouter, Route, Switch, BrowserRouter as Router } from "react-router-dom";
+import {
+  HashRouter,
+  Route,
+  Switch,
+  BrowserRouter as Router
+} from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import Login from "./Pages/Auth/login";
 import Register from "./Pages/Auth/register";
-import Auth from './Pages/Auth'
+import Auth from "./Pages/Auth";
 import * as serviceWorker from "./serviceWorker";
 
 const SliderComponent = () => (
   <Switch>
     <Route path="/" component={App}>
-    <Route path="/auth" render={({history,location,match}) => (
-                        <Auth history={history} location={location} match={location}>
-                            <Route path="/auth/sign_up" component={Register}></Route>
-                            <Route path="/auth/sign_in" component={Login}></Route>
-                        </Auth>
-                    )} />
-      <Route path="*" component={App}/>
+      <Route
+        path="/auth"
+        render={({ history, location, match }) => (
+          <Auth history={history} location={location} match={location}>
+            <Route path="/auth/sign_up" component={Register}></Route>
+            <Route path="/auth/sign_in" component={Login}></Route>
+          </Auth>
+        )}
+      />
+      <Route path="*" component={App} />
     </Route>
   </Switch>
 );

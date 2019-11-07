@@ -32,7 +32,7 @@ class LoginUserName extends React.Component {
       if (!err) {
         console.log("Received values of form: ", values);
         const instance = axios.post(
-          "http://192.168.3.3:8080/user-service/user/login",
+          "http://192.168.3.8:8080/user-service/user/login",
           {
             principal: this.state.username,
             credentials: this.state.password,
@@ -41,8 +41,6 @@ class LoginUserName extends React.Component {
         );
         instance.then(response => {
           if (response.status === 200) {
-            localStorage.setItem("access_token", response.data.access_token);
-            localStorage.setItem("refresh_token", response.data.refresh_token);
             this.props.history.push("/");
           }
         });
